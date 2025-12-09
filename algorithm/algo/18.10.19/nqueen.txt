@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<math.h>
+#define true 1
+#define false 0
+int x[4];char chess_board[4][5];
+int place(int k,int i)
+{
+	int j;
+	for( j=0;j<=k-1;j++)
+	{
+		if(x[j]==i||(abs(x[j]-i)==abs(j-k)))
+		{
+			return false;
+		}
+		
+	
+	}
+		return true;
+}
+
+void fill_chess()
+{
+	int j=0;int i;
+	
+	for(i=0;i<4;i++)
+	{
+		chess_board[i][x[j++]]='Q';
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			if(chess_board[i][j]!='Q')
+				chess_board[i][j]='X';
+		}
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%c \t",chess_board[i][j]);
+		}
+		printf("\n");
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		 chess_board[i][j]=' ';
+	}
+	printf("\n\n");
+}
+
+void nqueen(int k,int n)
+{
+	int i;
+	for(i=0;i<n;i++)
+	{
+		if(place(k,i))
+		{
+			x[k]=i;
+			if(k==n-1)
+				fill_chess();
+			else
+				nqueen(k+1,n);
+		}
+	}
+}
+
+void main()
+{
+	nqueen(0,4);
+}

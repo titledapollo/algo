@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<conio.h>
+
+void dijkstra(int v,int cost[10][10],int dist[],int n)
+{
+    int i,s[10],min,u,j,w;
+    for(i=1;i<=n;i++)
+    {
+        s[i]=0;
+        dist[i]=cost[v][i];
+    }
+    s[v]=1;
+    dist[v]=0;
+    for(j=2;j<n;j++)
+    {
+        min=99;
+        for(w=1;w<=n;w++)
+            if(dist[w]<min && !s[w])
+        {
+            min=dist[w];
+            u=w;
+        }
+        s[u]=1;
+        for(w=1;w<=n;w++)
+          if(dist[w]>dist[u]+cost[u][w])
+          dist[w]=dist[u]+cost[u][w];
+
+    }
+}
+void main()
+{
+    int n,v,cost[10][10],dist[10],i,j;
+    printf("Enter the no of nodes=");
+    scanf("%d",&n);
+    printf("Enter the cost adjacency matrix=");
+    for(i=1;i<=n;i++)
+    {
+         for(j=1;j<=n;j++)
+         {
+             scanf("%d",&cost[i][j]);
+         }
+    }
+    printf("Enter the source matrix=");
+    scanf("%d",&v);
+   dijkstra(v,cost,dist,n);
+   printf("\n Shortest path:");
+   for(i=1;i<=n;i++)
+    if(i!=v)
+    printf("%d->%d,Cost=%d\n",v,i,dist[i]);
+
+
+}

@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdlib.h>
+//int part(int ,int,int);
+//void qs(int ,int,int);
+void main()
+{
+int a[10],i,n;
+printf("Enter the no. of elements=");
+scanf("%d",&n);
+printf("Enter the elements=");
+for(i=0;i<n;i++)
+{
+scanf("%d",&a[i]);
+}
+qs(a,0,n-1);
+for(i=0;i<n;i++)
+{
+printf("%d",a[i]);
+}
+}
+int part(int a[],int lb,int ub)
+{
+int p,i,j,t1,t2;
+i=lb-1;
+//j=lb;
+p=a[ub];
+for(j=lb;j<ub;j++)
+{
+if(a[j]<=p)
+{
+i=i+1;
+t1=a[j];
+a[i]=a[j];
+a[j]=t1;
+}
+}
+t2=a[i+1];
+a[i+1]=a[ub];
+a[ub]=t2;
+return i+1;
+}
+void qs(int a[],int lb,int ub)
+{
+int pvt;
+if(lb<ub){
+pvt=part(a,lb,ub);
+qs(a,lb,(pvt-1));
+qs(a,(pvt+1),ub);
+}
+}
+
+
+
+
+
